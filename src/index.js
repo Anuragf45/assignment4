@@ -61,3 +61,24 @@ app.post("/register", function (req, res) {
 });
 
 app.listen(7000);
+
+
+
+
+
+
+
+
+
+app.post("/login",limiter ,function(req,res){
+  let email = req.body.email
+  let password = req.body.password
+console.log('inside login')
+  con.query("select * from registration where email = ? and password = ?",[email,password],function(eroor, results,fields){
+    if(results.length>0){
+      res.redirect("/dashboard")
+    }else{
+      res.redirect("/login")
+    }
+  });
+})
